@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/question.dart';
 import 'package:quizzler/quizbrain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -34,6 +34,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
+  int total = quizBrain.getQuestionBankLength();
   void checkAnswers(bool userPickedAnswer) {
     bool correctanswer = quizBrain.getQuestionAnswer()!;
 
@@ -56,7 +57,37 @@ class _QuizPageState extends State<QuizPage> {
         );
         print('User got it wrong!');
       }
+      int score = quizBrain.getScore();
 
+      if (quizBrain.getQuestionNumber() ==
+          quizBrain.getQuestionBankLength() - 1) {
+        Alert(
+          context: context,
+          type: AlertType.success,
+          title: "QUIZ COMPLETED",
+          desc: "Congratulations!\n Your score is $score out of $total.",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "Done!",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+              // onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+                setState(() {
+                  quizBrain.reset();
+                  scoreKeeper.clear();
+                });
+              },
+              width: 120,
+            ),
+          ],
+        ).show();
+      }
       quizBrain.nextQuestion();
     });
   }
