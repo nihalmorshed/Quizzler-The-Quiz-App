@@ -1,9 +1,7 @@
 class Question {
-  String? questionText;
-  bool? questionAnswer;
+  String questionText;
+  bool questionAnswer;
 
-  Question({String? questionText, bool? questionAnswer}) {
-    this.questionText = questionText;
-    this.questionAnswer = questionAnswer;
-  }
+  Question({required this.questionText, required this.questionAnswer});
+
 }
