@@ -29,7 +29,7 @@ git clone https://github.com/nihalmorshed/Quizzler-The-Quiz-App.git
 
 2. Navigate to the project directory:
 ```bash
-cd quizzler
+cd Quizzler-The-Quiz-App
 ```
 
 3. Install dependencies:
